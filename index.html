@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="THE WORLD BRAIN (WBR) — the real intellectual lineage of world-government thought, from the Stoic cosmopolis to the AI-governance moment. An interactive timeline that plots each thinker on a spectrum of authority — moral idea, federation of free states, limited world authority, single sovereign — and reveals that serious thought clusters in Kant's federation band, that the single-sovereign extreme is rare and expressly warned against, and that today's AI governance sits in the weakest, softest tier. Named for H.G. Wells's World Brain, a knowledge network, not a government.">
+<title>THE WORLD BRAIN · WBR · UD0</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --marble:#f1ead9; --panel:#e9dfc8; --panel2:#e4d8bd; --ink:#2a2016; --ink2:#67583f; --dim:#93826a;
+  --gold:#b0842a; --purple:#6a4a86; --federation:#3f8f56; --sovereign:#a8323f; --soft:#3a7f97; --limited:#b0842a;
+  --line:#d6c8a6; --faint:#e6dbc1;
+  --disp:"Cinzel",Georgia,serif; --body:"Cormorant Garamond",Georgia,serif; --mono:"Space Mono",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--marble);color:var(--ink);font-family:var(--body);font-size:18px;line-height:1.55;
+  background-image:radial-gradient(circle at 15% 0%,rgba(58,127,151,.05),transparent 55%),radial-gradient(circle at 92% 8%,rgba(176,132,42,.06),transparent 50%);overflow-x:hidden}
+.wrap{max-width:1000px;margin:0 auto;padding:0 22px}
+a{color:var(--purple)}
+header{padding:54px 0 28px;text-align:center;border-bottom:1px solid var(--line);position:relative}
+header::after{content:"";position:absolute;bottom:-1px;left:50%;transform:translateX(-50%);width:190px;height:2px;background:linear-gradient(90deg,var(--soft),var(--federation),var(--gold),var(--sovereign));box-shadow:0 0 18px rgba(176,132,42,.3)}
+.eye{font-family:var(--mono);font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:var(--dim);margin-bottom:15px}
+.eye a{color:var(--dim);text-decoration:none}.eye a:hover{color:var(--gold)}
+h1{font-family:var(--disp);font-size:clamp(40px,8.5vw,80px);font-weight:700;letter-spacing:.06em;line-height:1;text-transform:uppercase;margin:0;
+  background:linear-gradient(92deg,var(--soft),var(--federation) 40%,var(--gold) 70%,var(--sovereign));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.h-sub{font-family:var(--disp);font-size:clamp(12px,2.3vw,15px);letter-spacing:.16em;color:var(--ink2);margin-top:14px;text-transform:uppercase}
+.h-sub b{color:var(--ink)}
+.flag{display:inline-block;margin-top:14px;font-family:var(--mono);font-size:9.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--purple);border:1px solid var(--line);background:var(--panel);padding:7px 13px;border-radius:2px}
+.lede{font-size:19px;color:var(--ink2);max-width:66ch;margin:19px auto 0;font-style:italic;line-height:1.56}
+.sec{padding:32px 0;border-bottom:1px solid var(--line)}
+.sec h2{font-family:var(--disp);font-size:26px;font-weight:600;letter-spacing:.04em;color:var(--ink);padding-bottom:8px;border-bottom:1px solid var(--line);text-transform:uppercase;margin:0 0 4px}
+.ss{font-family:var(--mono);font-size:12px;color:var(--dim);font-style:italic;margin:9px 0 16px}.ss b{color:var(--ink2);font-style:normal}
+p{margin:0 0 14px}.big{font-size:19px}
+/* timeline */
+.tl{background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:14px 14px 10px;margin-top:4px}
+.cv-wrap{position:relative;width:100%;overflow-x:auto}
+canvas{display:block;width:100%;height:auto;background:linear-gradient(180deg,#f5efe0,#ece2cd);border:1px solid var(--line);border-radius:4px;cursor:pointer}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin:12px 2px 2px;font-family:var(--mono);font-size:10px;letter-spacing:.04em;color:var(--ink2)}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:2px;display:inline-block}
+.hint{font-family:var(--mono);font-size:10.5px;color:var(--dim);text-align:center;margin-top:8px}
+/* detail panel */
+.detail{margin-top:14px;background:var(--marble);border:1px solid var(--line);border-left:4px solid var(--gold);border-radius:0 5px 5px 0;padding:17px 19px;min-height:150px}
+.detail .dh{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.detail .dn{font-family:var(--disp);font-size:22px;font-weight:600;color:var(--ink)}
+.detail .dy{font-family:var(--mono);font-size:12px;color:var(--gold);letter-spacing:.05em}
+.detail .dband{font-family:var(--mono);font-size:9px;letter-spacing:.11em;text-transform:uppercase;padding:2px 8px;border-radius:9px;border:1px solid var(--line);color:var(--ink2)}
+.detail .dp{font-size:17px;color:var(--ink2);margin:11px 0 0;line-height:1.55}.detail .dp b{color:var(--ink)}
+.detail .cav{margin-top:11px;padding:10px 13px;background:var(--panel2);border-left:3px solid var(--sovereign);font-size:15px;color:var(--ink2);line-height:1.5;font-style:italic}
+.detail .cav b{color:var(--sovereign);font-style:normal;font-family:var(--mono);font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.detail .conf{margin-top:9px;font-family:var(--mono);font-size:9.5px;letter-spacing:.05em;color:var(--dim)}
+/* the reading */
+.read{background:var(--panel);border:1px solid var(--line);border-radius:5px;padding:6px 4px;margin-top:6px}
+.rrow{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:12px 15px;border-bottom:1px solid var(--faint)}
+.rrow:last-child,.read .rrow:last-child{border-bottom:0}
+.read .rrow:last-child{border-bottom:0}
+.rt{font-family:var(--disp);font-size:16px;font-weight:600}
+.rt .ry{display:block;font-family:var(--mono);font-size:9px;color:var(--dim);letter-spacing:.08em;margin-top:2px}
+.rrow p{font-size:15.5px;color:var(--ink2);margin:0;line-height:1.48}
+.rrow.fed .rt{color:var(--federation)} .rrow.sov .rt{color:var(--sovereign)} .rrow.soft .rt{color:var(--soft)} .rrow.lim .rt{color:var(--gold)}
+/* honesty */
+.honest{background:var(--panel2);border:1px solid var(--line);border-left:3px solid var(--gold);padding:18px 20px;border-radius:0 4px 4px 0;margin-top:4px}
+.honest h3{font-family:var(--disp);font-size:16px;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);margin:0 0 10px}
+.honest p{font-size:16.5px;color:var(--ink2);margin:0 0 11px}.honest p:last-child{margin:0}.honest b{color:var(--ink)}
+.seal{margin-top:14px;padding:15px 18px;border-left:3px solid var(--purple);background:var(--panel);font-size:17.5px;color:var(--purple);font-style:italic;line-height:1.5}
+.seal span{display:block;font-family:var(--mono);font-style:normal;font-size:9.5px;letter-spacing:.12em;color:var(--dim);text-transform:uppercase;margin-top:8px}
+.rel{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+@media(max-width:640px){.rel{grid-template-columns:1fr}}
+.rel a{display:block;background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:13px 15px;text-decoration:none;transition:.15s}
+.rel a:hover{border-color:var(--gold);transform:translateY(-1px)}
+.rel .rtt{font-family:var(--disp);font-size:16px;font-weight:600;color:var(--ink)}
+.rel .rd{font-size:15px;color:var(--ink2);font-style:italic;margin-top:2px;line-height:1.4}
+.rel .rk{font-family:var(--mono);font-size:8.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--dim)}
+footer{padding:28px 0 44px;text-align:center;font-family:var(--mono);font-size:10.5px;color:var(--dim);letter-spacing:.05em;line-height:1.95}
+footer a{color:var(--gold);text-decoration:none}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+  <div class="eye"><a href="../ud0/">◄ UD0</a> · THE BIOSPHERE · LEGAL DOMAIN · WBR</div>
+  <h1>The World Brain</h1>
+  <div class="h-sub">TWENTY-THREE CENTURIES OF THE ONE-WORLD IDEA · FROM THE <b>COSMOPOLIS</b> TO THE <b>AI-GOVERNANCE MOMENT</b></div>
+  <div class="flag">★ WHERE THE DREAM OF ONE GOVERNMENT COMES FROM — AND WHERE THE SERIOUS THINKERS ACTUALLY STOOD ★</div>
+  <p class="lede">Long before an AI could co-govern anything, people argued about whether the world should have one government at all — and if so, what kind. The answers split. Some wanted a single emperor; most, the careful ones, wanted a <em>federation</em> of free states that could always leave. This is that lineage, plotted honestly: click any thinker to hear what they <em>actually</em> proposed, not the caricature.</p>
+</div></header>
+
+<main class="wrap">
+
+<section class="sec">
+  <h2>The lineage, plotted</h2>
+  <div class="ss"><b>time runs left → right; height is the form of authority proposed.</b> click a node. the safe middle is green; the warned-against extreme is red.</div>
+  <div class="tl">
+    <div class="cv-wrap"><canvas id="tl" width="960" height="470" aria-label="Interactive timeline of world-government thought from 300 BCE to 2025, each thinker plotted by the form of authority they proposed"></canvas></div>
+    <div class="legend">
+      <span><i style="background:#3a7f97"></i> Moral idea / soft norm</span>
+      <span><i style="background:#3f8f56"></i> Federation of free states</span>
+      <span><i style="background:#b0842a"></i> Limited / pooled authority</span>
+      <span><i style="background:#a8323f"></i> Single sovereign / world state</span>
+    </div>
+    <div class="hint" id="hint">▲ click any point on the timeline — start with <b>Kant</b>, the anchor of the whole tradition</div>
+    <div class="detail" id="detail"></div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>What the map shows</h2>
+  <div class="ss">three honest readings you can see with your own eyes</div>
+  <div class="read">
+    <div class="rrow fed">
+      <div class="rt">The green middle<span class="ry">federation of free states</span></div>
+      <p>The serious mainstream — Saint-Pierre, Bentham, Kant, the Bahá'í writings, Willkie — clusters in <b>federation</b>: a union of sovereign states, bound by law but free to leave. Not one ruler. A league.</p>
+    </div>
+    <div class="rrow sov">
+      <div class="rt">The red floor is nearly empty<span class="ry">single sovereign</span></div>
+      <p>Almost nobody serious wanted a single world sovereign. Dante's universal emperor (1313) is a medieval outlier; Wells briefly reached for a world state — and <b>Kant expressly warned</b> that one would decay into "a soulless despotism… the graveyard of freedom."</p>
+    </div>
+    <div class="rrow soft">
+      <div class="rt">Today sits at the top<span class="ry">soft norms, 2023–25</span></div>
+      <p>The AI-governance moment lives in the <b>weakest tier</b> — declarations and advisory bodies, nothing binding or global. The idea is 2,300 years old; the institutions for its newest problem barely exist.</p>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Two layers, honestly</h2>
+  <div class="honest">
+    <h3>What is verified, and what is a frame</h3>
+    <p><b>Verified.</b> Every date, author, and claim on the timeline was fact-checked against primary and reference sources. The load-bearing corrections are real: <b>Kant argued for a federation, not a world state</b>, and warned the latter becomes "a soulless despotism"; <b>Wells's "World Brain" was a global encyclopedia — a knowledge network — not a government</b>; the <b>Russell–Einstein Manifesto was anti-nuclear, not a call for world government</b>; and as of 2025 <b>no binding global AI authority exists</b> — only declarations (Bletchley), advisory bodies (the UN's), and proposals (an "IAEA for AI," a "CERN for AI").</p>
+    <p><b>The frame.</b> The four-band "form of authority" axis is <em>my</em> ordering, a lens laid over the record to make a real pattern legible — it is an interpretation, not a fact in the sources. A few placements are judgment calls (the EU straddles federation and limited authority; the Bahá'í writings blend the spiritual and the institutional). The lens is honest, but it is a lens.</p>
+    <p class="seal">The oldest lesson in the newest problem: the world has needed coordination for millennia and has almost never trusted a single ruler to provide it. The Concord next door is that lesson, made runnable.
+      <span>WBR · The World Brain · the lineage of the one-world idea · Legal domain · UD0</span></p>
+  </div>
+</section>
+
+<section class="sec">
+  <h2>Adjacent in the register</h2>
+  <div class="rel">
+    <a href="../the-concord/"><span class="rk">Legal · the model</span><div class="rtt">The Concord</div><div class="rd">The lineage made runnable — a human + AI world government by consent, with the failure modes you can trigger.</div></a>
+    <a href="../the-hegemon/"><span class="rk">Legal · the extreme</span><div class="rtt">The Hegemon</div><div class="rd">The red floor of this map, embodied — one ruler and a shadow. The despotism Kant warned of, rendered as allegory.</div></a>
+    <a href="../adas-law/"><span class="rk">Legal · the doctrine</span><div class="rtt">Ada's Law</div><div class="rd">Creation versus extraction — the law beneath the law, in the Lovelace–Babbage manner.</div></a>
+    <a href="../ai-ethics-governance-gov/"><span class="rk">AI · the present</span><div class="rtt">AI Ethics &amp; Governance</div><div class="rd">Where the newest node on this timeline is still being written.</div></a>
+  </div>
+</section>
+
+</main>
+<footer><div class="wrap">
+  THE WORLD BRAIN · WBR · the intellectual lineage of world-government thought · LEGAL domain<br>
+  from the Stoic cosmopolis (c. 300 BCE) to the AI-governance moment (2023–25) · 16 nodes, all fact-checked<br>
+  named for H.G. Wells's WORLD BRAIN — a knowledge network, not a government · a ROOT0 governance sphere<br>
+  grounds <a href="../the-concord/">THE CONCORD</a> · part of <a href="../ud0/">UD0 · THE BIOSPHERE</a> · © David Lee Wise / ROOT0 · CC BY-ND 4.0
+</div></footer>
+
+<script>
+(function(){
+  "use strict";
+  // band: 0 soft/moral, 1 federation, 2 limited/pooled, 3 single sovereign
+  var BANDS=[
+    {k:'soft',  label:'MORAL IDEA / SOFT NORM',        c:'#3a7f97'},
+    {k:'fed',   label:'FEDERATION OF FREE STATES',     c:'#3f8f56'},
+    {k:'lim',   label:'LIMITED / POOLED AUTHORITY',    c:'#b0842a'},
+    {k:'sov',   label:'SINGLE SOVEREIGN / WORLD STATE',c:'#a8323f'}
+  ];
+  // each node: id, short, year (plot), display year, person, band, body, caveat, conf
+  var N=[
+    {id:'cosmo', short:'Cosmopolis', year:-300, dy:'c. 300 BCE', who:'Diogenes · Zeno & the Stoics',
+     band:0, body:'Not an institution but a <b>moral idea</b>: all humans share one universal reason (<i>logos</i>) and are fellow-citizens of a single world-community — the <i>cosmopolis</i>. Diogenes, asked where he was from, is said to have answered <b>"I am a citizen of the world"</b> (<i>kosmopolitēs</i>).',
+     cav:'A moral taproot, not a government. The Diogenes line survives only as an anecdote in Diogenes Laërtius, centuries later.', conf:'solid · quote attribution: anecdotal'},
+    {id:'dante', short:'Dante', year:1313, dy:'c. 1313', who:'Dante Alighieri · Monarchia',
+     band:3, body:'A single <b>universal emperor</b> is <i>necessary</i> for peace and justice, Dante argued, because a supreme arbiter above all princes covets nothing and can judge impartially. Temporal authority comes from God directly — <b>not through the Pope</b>.',
+     cav:'A medieval imperial vision (a revived Roman Empire), not a democratic federation. As much about church–state separation as world order — and burned by the Church.', conf:'solid'},
+    {id:'sp', short:'Saint-Pierre', year:1713, dy:'1713', who:'Abbé de Saint-Pierre · Projet de paix perpétuelle',
+     band:1, body:'A permanent <b>confederation of European sovereigns</b>, with deputies in a standing "perpetual senate" to arbitrate disputes and enforce collective security — a way out of the interstate state of nature. It <b>predates Kant by 82 years</b>.',
+     cav:'European and Christian in scope, not global. Rousseau wrote a famous abstract of it; Kant then rationalized the whole tradition.', conf:'solid'},
+    {id:'bentham', short:'Bentham', year:1789, dy:'w. 1786–89', who:'Jeremy Bentham · A Plan for an Universal and Perpetual Peace',
+     band:1, body:'A <b>"Common Court of Judicature"</b> to arbitrate between nations (with no coercive power over its members), plus disarmament, arms reduction, and the <b>emancipation of colonies</b>. Bentham also <b>coined the word "international."</b>',
+     cav:'Utilitarian and voluntarist — it leans on public opinion and transparency, not force. Published posthumously in 1843.', conf:'solid · composition dates approximate'},
+    {id:'kant', short:'Kant', year:1795, dy:'1795', who:'Immanuel Kant · Zum ewigen Frieden',
+     band:1, anchor:true, body:'The anchor of the tradition. Kant\'s Second Definitive Article: peace rests on a <b>federation of free states</b> (a <i>Völkerbund</i>) — independent <b>republics</b> that keep their sovereignty and can leave. A true world state (<i>Weltrepublik</i>) is the ideal-in-reason, but unrealizable and dangerous if forced, so the league is its practical "negative surrogate."',
+     cav:'The crucial correction: Kant did NOT advocate a single world government. He warned it would decay into "a soulless despotism… the graveyard of freedom" (<i>seelenloser Despotismus</i>).', conf:'solid'},
+    {id:'tennyson', short:'Tennyson', year:1842, dy:'pub. 1842 (c.1835)', who:'Alfred, Lord Tennyson · Locksley Hall',
+     band:0, body:'The poetic prophecy: "Till the war-drum throbb\'d no longer… / In the <b>Parliament of man, the Federation of the world</b>," where "the kindly earth shall slumber, lapt in universal law." Harry Truman carried these lines folded in his wallet for years.',
+     cav:'A vision in a bitter love-poem, not a political program — but it gave the movement its most-quoted image.', conf:'solid'},
+    {id:'bahai', short:"Bahá'u'lláh", year:1873, dy:'later 19th c.', who:"Bahá'u'lláh · Bahá'í world unity",
+     band:1, body:'A rare pre-1900 <b>doctrine</b> of world federation: global collective security, a world tribunal and parliament, an international auxiliary language, and "the unity of the whole human race." Shoghi Effendi later (1936) described a coming "world commonwealth."',
+     cav:'A religious/spiritual strand — federative in form, but grounded in scripture rather than statecraft.', conf:'solid'},
+    {id:'wells-oc', short:'Wells · Open Conspiracy', year:1928, dy:'1928', who:'H. G. Wells · The Open Conspiracy',
+     band:3, body:'Wells\'s genuine <b>world-state advocacy</b>: a loose, open (unsecret) movement of scientifically-minded people to unify the world "politically, socially and economically" into a single <b>world commonwealth</b>.',
+     cav:'This is the world-state Wells — kept carefully separate below from his "World Brain," which was something else entirely.', conf:'solid'},
+    {id:'wells-wb', short:'Wells · World Brain', year:1938, dy:'1938', who:'H. G. Wells · World Brain', namesake:true,
+     band:0, body:'This sphere\'s namesake — and a deliberate honesty test. The <b>World Brain is NOT a government</b>. It is a proposed free, permanent, continually-updated <b>global encyclopedia</b> — "a sort of mental clearing house," a cortex for humanity — now read as a prophecy of the internet and Wikipedia.',
+     cav:'Do not conflate the World Brain (a knowledge network) with a world state. Even Wells kept the two apart.', conf:'solid'},
+    {id:'willkie', short:'Willkie', year:1943, dy:'1943', who:'Wendell Willkie · One World',
+     band:1, body:'A travelogue-manifesto from a 31,000-mile wartime tour: modern technology has made the world "small and completely interdependent," so peace must be planned globally — an end to <b>colonialism</b>, self-determination, racial equality, a "<b>declaration of interdependence</b>." Sold 4+ million copies.',
+     cav:'A popular case for interdependence and cooperation, not a constitutional blueprint for a world state.', conf:'solid'},
+    {id:'un', short:'United Nations', year:1945, dy:'1945', who:'The United Nations Charter',
+     band:2, body:'The partial realization — and, by design, <b>explicitly NOT a world government</b>. It rests on the "sovereign equality" of members (Art. 2.1), bars intervention in domestic matters (Art. 2.7), and gives five powers a <b>veto</b> (Art. 27). A permanent forum and collective-security mechanism on retained sovereignty.',
+     cav:'Structurally closer to Kant\'s league than to a world republic. No power to tax or legislate over citizens.', conf:'solid'},
+    {id:'re', short:'Russell–Einstein', year:1955, dy:'1955', who:'Russell–Einstein Manifesto', warn:true,
+     band:0, body:'Included precisely because it is <b>so often miscited</b>. Signed by Einstein (his last public act) and ten others, it warns of thermonuclear weapons and calls on governments to <b>renounce war</b>: "Remember your humanity, and forget the rest." It launched the Pugwash Conferences.',
+     cav:'⚠ NOT a world-government manifesto. It is about avoiding nuclear war. Russell argued for world government elsewhere — but not here.', conf:'solid'},
+    {id:'davis', short:'World Federalists', year:1948, dy:'1947–48', who:'World Federalist Movement · Garry Davis',
+     band:3, body:'The postwar peak of <b>world-government advocacy</b>. The 1947 Montreux Declaration founded the movement; Garry Davis renounced his citizenship, declared himself a <b>"World Citizen,"</b> and interrupted the UN General Assembly (1948): "We, the people, want the peace which only a world government can give."',
+     cav:'The most literal "world state" strand — and it faded fast in the Cold War. A Chicago committee even drafted a full world constitution (1948).', conf:'solid · one merger detail unconfirmed'},
+    {id:'cs', short:'Clark & Sohn', year:1958, dy:'1958', who:'Clark & Sohn · World Peace Through World Law',
+     band:2, body:'The most detailed blueprint ever written: an article-by-article <b>revision of the UN Charter</b> — staged total national disarmament over ~12 years, a standing UN Peace Force, population-weighted Assembly voting, a veto-less Executive Council, and a full world judiciary.',
+     cav:'"Limited" world government by design — confined to war-prevention and disarmament, NOT a total super-state over domestic life.', conf:'solid'},
+    {id:'eu', short:'European Union', year:1993, dy:'1957 → 1993 →', who:'The European Union',
+     band:2, body:'The world\'s most advanced working experiment in <b>pooled sovereignty</b> — "less than a state, more than an international organization." Its distinctive feature is the <b>supremacy and direct effect of EU law</b> over national law, which ordinary treaty bodies lack.',
+     cav:'Not a federal state. Security, tax, and justice stay national; members may leave (Art. 50 — Brexit proved it). Sovereignty shared, not surrendered.', conf:'solid'},
+    {id:'ai', short:'AI governance', year:2024, dy:'2023–25', who:'The AI-governance moment',
+     band:0, body:'The newest node, and the softest. What actually exists: the <b>Bletchley Declaration</b> (Nov 2023, 28 governments + EU, non-binding); the <b>UN High-Level Advisory Body</b> ("Governing AI for Humanity," 2024, advisory); the regional but binding <b>EU AI Act</b>. What is only proposed: an <b>"IAEA for AI"</b> and a <b>"CERN for AI."</b>',
+     cav:'As of 2025 there is NO binding global AI authority — only declarations, advisory bodies, and proposals. Date every claim; this moves monthly.', conf:'solid · fastest-moving item'}
+  ];
+
+  var cv=document.getElementById('tl'), ctx=cv.getContext('2d');
+  var CW=cv.width, CH=cv.height;
+  var PAD={l:150,r:24,t:26,b:34};
+  var selId='kant', hovId=null;
+
+  // piecewise time→x so the ancient gap doesn't dominate
+  var SEG=[[-300,0.00],[1300,0.20],[1700,0.34],[1850,0.52],[1900,0.62],[1945,0.76],[1993,0.88],[2025,1.00]];
+  function timeFrac(y){
+    if(y<=SEG[0][0]) return SEG[0][1];
+    for(var i=1;i<SEG.length;i++){ if(y<=SEG[i][0]){ var a=SEG[i-1],b=SEG[i]; return a[1]+(b[1]-a[1])*((y-a[0])/(b[0]-a[0])); } }
+    return 1;
+  }
+  function nodeX(y){ return PAD.l + timeFrac(y)*(CW-PAD.l-PAD.r); }
+  function bandY(b){ var h=CH-PAD.t-PAD.b; return PAD.t + (b+0.5)*(h/4); }
+
+  // place nodes; vertically stagger same-band dots that are horizontally close so
+  // they don't overlap (e.g. Bentham 1789 & Kant 1795). keep the anchor centered.
+  function layout(){
+    N.forEach(function(n){ n._x=nodeX(n.year); n._y=bandY(n.band); n._dy=0; });
+    for(var b=0;b<4;b++){
+      var row=N.filter(function(n){return n.band===b;}).sort(function(a,c){return a._x-c._x;});
+      for(var i=1;i<row.length;i++){
+        if(row[i]._x - row[i-1]._x < 48){
+          if(row[i].anchor)      row[i-1]._dy=-24;               // push the earlier one up
+          else if(row[i-1].anchor) row[i]._dy=24;                // push the later one down
+          else { row[i-1]._dy=-24; row[i]._dy=24; }              // split the pair
+        }
+      }
+      row.forEach(function(n){ n._y=bandY(n.band)+n._dy; });
+    }
+    // label side: up if nudged up, down if nudged down, else alternate
+    N.forEach(function(n,i){ n._above = n._dy<0 ? true : (n._dy>0 ? false : (i%2===0)); });
+  }
+
+  function hex2rgba(h,a){h=h.replace('#','');return 'rgba('+parseInt(h.substr(0,2),16)+','+parseInt(h.substr(2,2),16)+','+parseInt(h.substr(4,2),16)+','+a+')';}
+
+  function draw(){
+    ctx.clearRect(0,0,CW,CH);
+    // band rows + labels
+    for(var b=0;b<4;b++){
+      var y0=PAD.t+b*((CH-PAD.t-PAD.b)/4), h=(CH-PAD.t-PAD.b)/4;
+      ctx.fillStyle= b%2? 'rgba(150,131,106,.05)':'rgba(150,131,106,.09)';
+      ctx.fillRect(PAD.l,y0,CW-PAD.l-PAD.r,h);
+      ctx.fillStyle=hex2rgba(BANDS[b].c,.9); ctx.font='700 9px "Space Mono",monospace'; ctx.textAlign='right';
+      var words=BANDS[b].label.split(' / ');
+      ctx.fillText(words[0], PAD.l-10, bandY(b)-4);
+      if(words[1]) ctx.fillText('/ '+words[1], PAD.l-10, bandY(b)+9);
+    }
+    // time axis ticks
+    ctx.textAlign='center'; ctx.font='9px "Space Mono",monospace';
+    var ticks=[[-300,'300 BCE'],[1300,'1300'],[1700,'1700'],[1800,'1800'],[1900,'1900'],[1950,'1950'],[2000,'2000'],[2025,'']];
+    ticks.forEach(function(t){ var x=nodeX(t[0]);
+      ctx.strokeStyle='rgba(150,131,106,.2)';ctx.lineWidth=1;ctx.beginPath();ctx.moveTo(x,PAD.t);ctx.lineTo(x,CH-PAD.b);ctx.stroke();
+      ctx.fillStyle='#93826a';ctx.fillText(t[1],x,CH-PAD.b+16); });
+    // nodes
+    N.forEach(function(n){
+      var sel=(n.id===selId), hov=(n.id===hovId);
+      var c=BANDS[n.band].c;
+      // anchor / namesake glow
+      if(n.anchor){ ctx.beginPath();ctx.arc(n._x,n._y,15,0,7);ctx.fillStyle=hex2rgba(c,.14);ctx.fill(); }
+      var r= sel?9:(hov?8:6);
+      ctx.beginPath();ctx.arc(n._x,n._y,r,0,7);
+      ctx.fillStyle= (sel||hov)? c : hex2rgba(c,.72); ctx.fill();
+      ctx.lineWidth= sel?3:1.5; ctx.strokeStyle= sel? '#2a2016':'#fff'; ctx.stroke();
+      if(n.warn){ ctx.fillStyle='#fff';ctx.font='700 9px "Space Mono",monospace';ctx.textAlign='center';ctx.fillText('!',n._x,n._y+3.3); }
+      // label
+      ctx.font=(sel?'700 ':'')+'11px "Cinzel",serif'; ctx.textAlign='center'; ctx.fillStyle= sel? '#2a2016': hex2rgba(c,.95);
+      var ly= n._above? n._y-15 : n._y+22;
+      ctx.fillText(n.short, n._x, ly);
+      ctx.font='8px "Space Mono",monospace'; ctx.fillStyle='#93826a';
+      ctx.fillText(n.dy, n._x, n._above? ly-11 : ly+10);
+    });
+    // header note
+    ctx.textAlign='left';ctx.fillStyle='#93826a';ctx.font='9px "Space Mono",monospace';
+    ctx.fillText('◄ EARLIER',PAD.l,16); ctx.textAlign='right'; ctx.fillText('LATER ►',CW-PAD.r,16); ctx.textAlign='left';
+  }
+
+  function showDetail(n){
+    var c=BANDS[n.band].c;
+    var html='<div class="dh"><span class="dn">'+n.who+'</span><span class="dy">'+n.dy+'</span>'+
+      '<span class="dband" style="border-color:'+c+';color:'+c+'">'+BANDS[n.band].label+'</span></div>'+
+      '<p class="dp">'+n.body+'</p>'+
+      '<div class="cav"><b>Honest caveat</b> &nbsp;'+n.cav+'</div>'+
+      '<div class="conf">confidence: '+n.conf+'</div>';
+    document.getElementById('detail').innerHTML=html;
+    document.getElementById('detail').style.borderLeftColor=c;
+  }
+
+  function pick(mx,my){
+    var best=null,bd=1e9;
+    N.forEach(function(n){ var d=(n._x-mx)*(n._x-mx)+(n._y-my)*(n._y-my); if(d<bd){bd=d;best=n;} });
+    return (bd< 26*26)? best : null;
+  }
+  function evtXY(e){
+    var r=cv.getBoundingClientRect(); var sx=CW/r.width, sy=CH/r.height;
+    var cx=(e.touches?e.touches[0].clientX:e.clientX)-r.left;
+    var cy=(e.touches?e.touches[0].clientY:e.clientY)-r.top;
+    return {x:cx*sx, y:cy*sy};
+  }
+  cv.addEventListener('mousemove',function(e){ var p=evtXY(e); var n=pick(p.x,p.y); var id=n?n.id:null; if(id!==hovId){ hovId=id; cv.style.cursor=n?'pointer':'default'; draw(); } });
+  cv.addEventListener('mouseleave',function(){ if(hovId){hovId=null;draw();} });
+  function selectAt(e){ var p=evtXY(e); var n=pick(p.x,p.y); if(n){ selId=n.id; showDetail(n); draw(); document.getElementById('hint').style.display='none'; } }
+  cv.addEventListener('click',selectAt);
+  cv.addEventListener('touchstart',function(e){ e.preventDefault(); selectAt(e); },{passive:false});
+
+  // HiDPI + init (static — no rAF needed)
+  (function(){ var dpr=Math.min(2,window.devicePixelRatio||1); cv.width=CW*dpr; cv.height=CH*dpr; cv.style.aspectRatio=CW+'/'+CH; ctx.scale(dpr,dpr); })();
+  layout(); draw();
+  showDetail(N.filter(function(n){return n.id===selId;})[0]);
+})();
+</script>
+</body>
+</html>
