@@ -4,6 +4,6 @@ slug  : the-world-brain
 seal  : 6bbc40c0d42fd0fcc6cb11bf77718bf2aaef1c72233d7abda5b4acc7c315f909
 prev  : 806d95e67a6559d6ab87b90a9354dd6ce5e0b8226b484da6658eb4004ab96ef7
 link  : f5d2ca04cb3c0878630532a28fb8c415c9bf887420961bc116bf60d58b02f40b
-head  : 3447d3a0533aaf1e29a8bdc67a9774884fb3ae9dbc8a17064b7a008ca3c4ec90
+head  : 13f9ace173ef2e60af38912ba329b4afcb5a38b84a0e4495e8d30327f8c99cc2
 
 — the tether: link = sha256(index|slug|seal|prev). the chain head commits to the whole corpus.
